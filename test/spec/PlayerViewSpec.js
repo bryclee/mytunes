@@ -32,7 +32,7 @@ describe('PlayerView', function() {
   });
 
   describe('Song transitions', function() {
-    xit('dequeues a song when finished playing & plays the next song', function(){
+    it('dequeues a song when finished playing & plays the next song', function(){
       var firstSong = library.at(0)
         , secondSong = library.at(1)
         , thirdSong = library.at(2)
@@ -51,6 +51,15 @@ describe('PlayerView', function() {
       $(appView.playerView.el).trigger('ended');
       expect(appView.playerView.model).to.equal(thirdSong);
     });
+
+    it('stops playing when the song is removed from queue', function() {
+      var firstSong = library.at(0);
+      var songQueue = appView.model.get('songQueue');
+      songQueue.add(firstSong);
+      songQueue.playFirst()
+      songQueue.remove(firstSong);
+      expect(appView.playerView.model).to.not.equal(firstSong); 
+    })
   });
 
 });
