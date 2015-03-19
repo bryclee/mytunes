@@ -57,8 +57,8 @@ describe('PlayerView', function() {
       var songQueue = appView.model.get('songQueue');
       songQueue.add(firstSong);
       songQueue.playFirst()
-      songQueue.remove(firstSong);
-      expect(appView.playerView.model).to.not.equal(firstSong); 
+      songQueue.trigger('dequeue');
+      expect(appView.playerView.model).to.deep.equal(firstSong); 
     })
   });
 
