@@ -4,8 +4,12 @@ var PlaylistView = Backbone.View.extend ({
 
 	initialize: function () {
 		this.render();
+		var self = this;
+		this.$el.on('change', function() {
+			console.log('index: ', self.$el.val())
+		}),
 
-		this.collection.on('add', this.render, this);
+		this.collection.on('add', this.render, this)
 	},
 
 	render: function () {
